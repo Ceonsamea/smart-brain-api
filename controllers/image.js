@@ -6,6 +6,7 @@ const app = new Clarifai.App({
  apiKey: process.env.CLARIFAI_API_KEY
 });
 
+
 const handleApiCall = (req, res) => {
   app.models
     // This part has been updated with the recent Clarifai changes. Used to be:
@@ -14,7 +15,10 @@ const handleApiCall = (req, res) => {
     .then(data => {
       res.json(data);
     })
-    .catch(err => res.status(400).json('unable to work with API'))
+    .catch(err => {
+      console.log("unable to work with API: ", err)
+      res.status(400).json('unable to work with API')
+      })
 }
 
 const handleImage = (req, res, db) => {
